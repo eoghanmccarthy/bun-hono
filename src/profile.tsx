@@ -3,7 +3,6 @@ import type { FC } from 'hono/jsx'
 import { Hono } from 'hono'
 import { basicAuth } from 'hono/basic-auth'
 
-
 import Layout from './layout'
 
 const app = new Hono()
@@ -20,7 +19,7 @@ app.use(
     '/*',
     basicAuth({
         username: 'me',
-        password: 'acoolproject',
+        password: process.env.PASSWORD,
     })
 )
 
