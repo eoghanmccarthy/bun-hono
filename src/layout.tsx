@@ -1,4 +1,5 @@
 import type { FC } from 'hono/jsx'
+import { html } from 'hono/html'
 
 type ROUTE = {
     path: string,
@@ -7,26 +8,26 @@ type ROUTE = {
 
 const routes : ROUTE[] = [
     { path: '/', title: 'Home' },
-    { path: '/bio', title: 'Bio' },
-    { path: '/work', title: 'Work' },
-    { path: '/profile', title: 'Profile' }
+    // { path: '/posts', title: 'Posts' },
+    { path: '/profile', title: 'Profile' },
+    { path: '/dashboard', title: 'Dashboard' }
 ]
 
 const Layout: FC = (props) => {
-    return (
-        <html>
+    return html`
+        <!DOCTYPE html>
+        <html lang="en">
         <body>
         <header>
             <nav>
-                {routes.map((route) => {
+                ${routes.map((route) => {
                     return <a href={route.path}>{route.title}</a>
                 })}
             </nav>
         </header>
-        <main>{props.children}</main>
+        <main>${props.children}</main>
         </body>
-        </html>
-    )
+        </html>`
 }
 
 export default Layout
