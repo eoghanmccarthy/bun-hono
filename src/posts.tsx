@@ -1,16 +1,11 @@
 import type { FC } from 'hono/jsx'
+import { Post } from "./types";
 
 import { Hono } from 'hono'
 
 import { clientApi } from "./api.config";
 
 const app = new Hono()
-
-export interface Post {
-    id: number
-    title: string
-    content: string
-}
 
 const Post: FC<{ post: Post }> = (props) => {
     return (

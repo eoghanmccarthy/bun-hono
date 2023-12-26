@@ -1,14 +1,10 @@
 import type { FC } from 'hono/jsx'
+import { Route } from "./types";
+
 import { html } from 'hono/html'
 
-type ROUTE = {
-    path: string,
-    title: string,
-}
-
-const routes : ROUTE[] = [
+const routes : Route[] = [
     { path: '/', title: 'Home' },
-    // { path: '/posts', title: 'Posts' },
     { path: '/profile', title: 'Profile' },
     { path: '/dashboard', title: 'Dashboard' }
 ]
@@ -21,7 +17,7 @@ const Layout: FC = (props) => {
         <header>
             <nav>
                 ${routes.map((route) => {
-                    return <a href={route.path}>{route.title}</a>
+                    return <a href={route.path} key={route.path}>{route.title}</a>
                 })}
             </nav>
         </header>

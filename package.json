@@ -1,11 +1,13 @@
 {
   "scripts": {
-    "dev": "API_URL=http://localhost:3001 bun run --hot src/index.tsx"
+    "dev": "API_URL=http://localhost:3001 bun run --hot src/index.tsx",
+    "lint": "eslint \"**/*.{ts,tsx}\""
   },
   "dependencies": {
     "hono": "^3.11.8"
   },
   "devDependencies": {
+    "@eoghanmccarthy/eslint-config": "github:eoghanmccarthy/eslint-config",
     "bun-types": "^1.0.7"
   }
 }

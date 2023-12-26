@@ -3,8 +3,7 @@ import type { FC } from 'hono/jsx'
 import { Hono } from 'hono'
 import { html } from 'hono/html'
 import { basicAuth } from 'hono/basic-auth'
-
-import { clientApi } from "./api.config";
+import { env } from 'hono/adapter'
 
 const app = new Hono()
 
@@ -18,7 +17,13 @@ const Dashboard: FC = (props) => {
                         form.addEventListener('submit', function(event) {
                             event.preventDefault();
                             const formData = new FormData(form);
-                            fetch(form.action, { method: 'POST', body: formData }).then((response) => {
+                            fetch(form.action, {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    'Authorization': 'Bearer ${props.token}'
+                                }
+                            }).then((response) => {
                                 form.reset();
                             });
                         });
@@ -27,9 +32,9 @@ const Dashboard: FC = (props) => {
             `}
             <h1>My dashboard!</h1>
             <h3>Add post</h3>
-            <form id="postForm" method="POST" action={`${process.env.API_URL}/api/posts`}>
-                <input type="text" name="title" placeholder="Title" />
-                <input type="text" name="content" placeholder="Content" />
+            <form action={`${props.apiUrl}/api/posts`} id="postForm" method="POST">
+                <input name="title" placeholder="Title" type="text" />
+                <input name="content" placeholder="Content" type="text" />
                 <button type="submit">Submit</button>
             </form>
         </>
@@ -39,13 +44,14 @@ const Dashboard: FC = (props) => {
 app.use(
     '/*',
     basicAuth({
-        username: 'me',
         password: process.env.PASSWORD || '',
+        username: 'me',
     })
 )
 
 app.get('/', (c) => {
-    return c.render(<Dashboard />)
+    const { API_URL, BEARER_TOKEN } = env<{ API_URL: string, BEARER_TOKEN: string }>(c)
+    return c.render(<Dashboard apiUrl={API_URL} token={BEARER_TOKEN} />)
 })
 
 export default app

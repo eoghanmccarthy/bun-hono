@@ -1,8 +1,9 @@
 import type { FC } from 'hono/jsx'
-import { jsxRenderer } from 'hono/jsx-renderer'
-import { logger } from 'hono/logger'
+import {Post} from "./types";
 
 import { Hono } from 'hono'
+import { jsxRenderer } from 'hono/jsx-renderer'
+import { logger } from 'hono/logger'
 
 import posts from './posts'
 import profile from './profile'
@@ -12,12 +13,6 @@ import Layout from './layout'
 
 import { clientApi } from "./api.config";
 
-export interface Post {
-    id: number
-    title: string
-    content: string
-}
-
 const app = new Hono()
 
 const Home: FC<{ posts: Post[] }> = (props) => {
@@ -25,7 +20,7 @@ const Home: FC<{ posts: Post[] }> = (props) => {
         <>
             <h1>Hello World!</h1>
             <ul>
-                {props.posts.map(post => {
+                {props.posts.map((post) => {
                     return <li key={post.id}>{post.title}</li>
                 })}
             </ul>
