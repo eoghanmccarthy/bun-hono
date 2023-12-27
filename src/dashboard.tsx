@@ -2,7 +2,6 @@ import type { FC } from 'hono/jsx'
 
 import { Hono } from 'hono'
 import { html } from 'hono/html'
-import { basicAuth } from 'hono/basic-auth'
 import { env } from 'hono/adapter'
 
 const app = new Hono()
@@ -17,11 +16,14 @@ const Dashboard: FC = (props) => {
                         form.addEventListener('submit', function(event) {
                             event.preventDefault();
                             const formData = new FormData(form);
+                            
+                            const authHeader = 'Basic ' + props.encodedCredentials;
+
                             fetch(form.action, {
                                 method: 'POST',
                                 body: formData,
                                 headers: {
-                                    'Authorization': 'Bearer ${props.token}'
+                                    'Authorization': authHeader
                                 }
                             }).then((response) => {
                                 form.reset();
@@ -41,17 +43,11 @@ const Dashboard: FC = (props) => {
     )
 }
 
-app.use(
-    '/*',
-    basicAuth({
-        password: process.env.PASSWORD || '',
-        username: 'me',
-    })
-)
-
 app.get('/', (c) => {
-    const { API_URL, BEARER_TOKEN } = env<{ API_URL: string, BEARER_TOKEN: string }>(c)
-    return c.render(<Dashboard apiUrl={API_URL} token={BEARER_TOKEN} />)
+    const { API_URL, PASSWORD } = env<{ API_URL: string, PASSWORD: string }>(c)
+    const credentials = 'me' + ':' + PASSWORD;
+    const encodedCredentials = btoa(credentials);
+    return c.render(<Dashboard apiUrl={API_URL} credentials={encodedCredentials} />)
 })
 
 export default app
