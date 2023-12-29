@@ -17,7 +17,7 @@ const Dashboard: FC = (props) => {
                             event.preventDefault();
                             const formData = new FormData(form);
                             
-                            const authHeader = 'Basic ' + props.encodedCredentials;
+                            const authHeader = 'Basic ' + '${props.credentials}';
 
                             fetch(form.action, {
                                 method: 'POST',
