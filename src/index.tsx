@@ -6,7 +6,6 @@ import { jsxRenderer } from 'hono/jsx-renderer'
 import { logger } from 'hono/logger'
 
 import posts from './posts'
-import profile from './profile'
 import dashboard from './dashboard'
 
 import Layout from './layout'
@@ -51,7 +50,6 @@ app.get('/', async (c) => {
 })
 
 app.route('/posts', posts)
-app.route('/profile', profile)
 app.route('/dashboard', dashboard)
 
 

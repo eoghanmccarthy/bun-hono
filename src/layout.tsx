@@ -5,7 +5,6 @@ import { html } from 'hono/html'
 
 const routes : Route[] = [
     { path: '/', title: 'Home' },
-    { path: '/profile', title: 'Profile' },
     { path: '/dashboard', title: 'Dashboard' }
 ]
 
