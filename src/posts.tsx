@@ -11,6 +11,7 @@ const Post: FC<{ post: Post }> = (props) => {
     return (
         <>
             <h1>My post!</h1>
+            <h4>{props.post.title}</h4>
             <p>{props.post.content}</p>
         </>
     )

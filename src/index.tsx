@@ -18,10 +18,13 @@ const app = new Hono()
 const Home: FC<{ posts: Post[] }> = (props) => {
     return (
         <>
-            <h1>Hello World!</h1>
+            <h1>Hello!</h1>
             <ul>
                 {props.posts.map((post) => {
-                    return <li key={post.id}>{post.title}</li>
+                    return (
+                        <li key={post.id}>
+                            <a href={`posts/${post.id}`}>{post.title}</a>
+                        </li>)
                 })}
             </ul>
         </>

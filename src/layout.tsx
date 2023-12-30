@@ -13,16 +13,16 @@ const Layout: FC = (props) => {
     return html`
         <!DOCTYPE html>
         <html lang="en">
-        <body>
-        <header>
-            <nav>
-                ${routes.map((route) => {
-                    return <a href={route.path} key={route.path}>{route.title}</a>
-                })}
-            </nav>
-        </header>
-        <main>${props.children}</main>
-        </body>
+            <body style="font-family: monospace">
+                <header>
+                    <nav style="display: inline-flex; gap: 4px">
+                        ${routes.map((route) => {
+                            return <a href={route.path} key={route.path}>{route.title}</a>
+                        })}
+                    </nav>
+                </header>
+                <main>${props.children}</main>
+            </body>
         </html>`
 }
 
