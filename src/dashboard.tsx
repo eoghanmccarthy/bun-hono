@@ -33,7 +33,7 @@ const Dashboard: FC = (props) => {
                 </script>
             `}
             <h1>My dashboard!</h1>
-            <form action={`${props.apiUrl}/api/posts`} id="postForm" method="POST" style="display: inline-grid">
+            <form action={`${props.apiUrl}/api/posts`} id="postForm" method="POST" style="display: grid">
                 <input name="title" placeholder="Title" type="text" />
                 <input name="content" placeholder="Content" type="text" />
                 <button type="submit">Add post</button>

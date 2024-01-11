@@ -12,7 +12,7 @@ const Layout: FC = (props) => {
     return html`
         <!DOCTYPE html>
         <html lang="en">
-            <body style="font-family: monospace">
+            <body style="font-family: sans-serif">
                 <header>
                     <nav style="display: inline-flex; gap: 4px">
                         ${routes.map((route) => {
